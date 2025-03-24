@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    :root {
+        --paper-listbox-background-color: #212121;
+        --paper-listbox-color: #fff;
+        --ytmusic-menu-item-hover-background-color: rgba(255,255,255,0.05)
+    }
+    body {
+        background: black;
+    }
+    tp-ytl-paper-listbox.ytmusic-menu-popup-renderer {
+        width: 240px;
+        padding: 16px 0;
+        border: 1px solid rgba(255,255,255,.1);
+        border-radius: 2px;
+    }
+    tp-ytl-paper-listbox {
+    	display: block;
+        padding: 8px 0;
+        background: var(--paper-listbox-background-color,var(--primary-background-color));
+        color: var(--paper-listbox-color,var(--primary-text-color));
+        border: var(--paper-listbox-border);
+    }
+    #items.ytmusic-menu-popup-renderer > .ytmusic-menu-popup-renderer:hover {
+        background-color: var(--ytmusic-menu-item-hover-background-color);
+    }
+    ytlmusic-menu-navigation-item-renderer {
+        display: block;
+        --iron-icon-fill-color: #fff;
+    }
+    .yt-simple-endpoint:hover {
+        color: var(--yt-endpoint-hover-color,var(--yt-spec-text-primary));
+        -moz-text-decoration: var(--yt-endpoint-text-decoration,none);
+        text-decoration: var(--yt-endpoint-text-decoration,none);
+    }
+    .yt-simple-endpoint.ytmusic-menu-navigation-item-renderer {
+        display: -moz-box;
+        display: flex;
+        height: 48px;
+        -moz-box-align: center;
+        align-items: center;
+        padding: 0 8px;
+    }
+    .yt-simple-endpoint {
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--yt-endpoint-color,var(--yt-spec-text-primary));
+    }
+    .icon.ytmusic-menu-navigation-item-renderer {
+        -moz-box-flex: 0;
+        flex: none;
+        margin: 8px;
+        fill: #aaa;
+    }
+    ytl-icon, .yt-icon-container.yt-icon {
+        display: inline-flexbox;
+        display: -moz-inline-box;
+        display: inline-flex;
+        -moz-box-align: center;
+        align-items: center;
+        -moz-box-pack: center;
+        justify-content: center;
+        position: relative;
+        vertical-align: middle;
+        fill: var(--iron-icon-fill-color,currentcolor);
+        stroke: var(--iron-icon-stroke-color,none);
+        width: var(--iron-icon-width,24px);
+        height: var(--iron-icon-height,24px);
+        animation: var(--iron-icon-animation);
+        margin-top: var(--iron-icon-margin-top);
+        margin-right: var(--iron-icon-margin-right);
+        margin-bottom: var(--iron-icon-margin-bottom);
+        margin-left: var(--iron-icon-margin-left);
+        padding: var(--iron-icon-padding);
+    }
+    .text.ytmusic-menu-navigation-item-renderer {
+        font-family: Roboto,Noto Naskh Arabic UI,Arial,sans-serif;
+        font-size: 14px;
+        line-height: var(--ytmusic-body-line-height);
+        font-weight: 400;
+        color: #fff;
+        margin: 0 8px;
+    }
+</style>
+<body>
+    <tp-ytl-paper-listbox id="items" activate-event="ytmusic-menu-item-activated-internal" role="menu" class="style-scope ytmusic-menu-popup-renderer" tabindex="0">
+        <ytlmusic-menu-navigation-item-renderer class="style-scope ytmusic-menu-popup-renderer iron-selected" role="menuitem" tabindex="0" aria-disabled="false" aria-selected="true">
+            <!--css-build:shady--><!--css-build:shady-->
+            <a id="navigation-endpoint" class="yt-simple-endpoint style-scope ytmusic-menu-navigation-item-renderer" tabindex="-1" target="_blank" href="https://www.youtube.com/watch?v=-7HMCgJpXjM&amp;list=RDAMVM-7HMCgJpXjM">
+                <ytl-icon class="icon style-scope ytmusic-menu-navigation-item-renderer">
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;" class="style-scope yt-icon">
+                        <g class="style-scope yt-icon">
+                            <path d="M10.5,14.41V9.6l4.17,2.4L10.5,14.41z M8.48,8.45L7.77,7.75C6.68,8.83,6,10.34,6,12s0.68,3.17,1.77,4.25l0.71-0.71 C7.57,14.64,7,13.39,7,12S7.57,9.36,8.48,8.45z M16.23,7.75l-0.71,0.71C16.43,9.36,17,10.61,17,12s-0.57,2.64-1.48,3.55l0.71,0.71 C17.32,15.17,18,13.66,18,12S17.32,8.83,16.23,7.75z M5.65,5.63L4.95,4.92C3.13,6.73,2,9.24,2,12s1.13,5.27,2.95,7.08l0.71-0.71 C4.02,16.74,3,14.49,3,12S4.02,7.26,5.65,5.63z M19.05,4.92l-0.71,0.71C19.98,7.26,21,9.51,21,12s-1.02,4.74-2.65,6.37l0.71,0.71 C20.87,17.27,22,14.76,22,12S20.87,6.73,19.05,4.92z" class="style-scope yt-icon"></path>
+                        </g>
+                    </svg>
+                    <!--css-build:shady--><!--css-build:shady-->
+                </ytl-icon>
+                <ytl-formatted-string class="text style-scope ytmusic-menu-navigation-item-renderer">Listen on YouTube</ytl-formatted-string>
+            </a>
+        </ytlmusic-menu-navigation-item-renderer>
+    </tp-ytl-paper-listbox>
+</body>
+</html>
