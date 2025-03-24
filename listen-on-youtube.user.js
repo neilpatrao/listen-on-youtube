@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Listen On YouTube
 // @namespace    http://tampermonkey.net/
-// @version      2025-03-21
+// @version      2025-03-24
 // @description  Adds "Listen on YouTube" button to YouTube Music.
 // @author       Neil Patrao
 // @match        *://music.youtube.com/*
@@ -62,7 +62,7 @@
     const BUTTON = $(`
         <ytlmusic-menu-navigation-item-renderer class="style-scope ytmusic-menu-popup-renderer iron-selected" role="menuitem" tabindex="0" aria-disabled="false" aria-selected="true">
             <!--css-build:shady--><!--css-build:shady-->
-            <a id="navigation-endpoint" class="yt-simple-endpoint style-scope ytmusic-menu-navigation-item-renderer" tabindex="-1" target="_blank" href="https://www.youtube.com/watch?v=-7HMCgJpXjM&amp;list=RDAMVM-7HMCgJpXjM">
+            <a id="navigation-endpoint" class="yt-simple-endpoint style-scope ytmusic-menu-navigation-item-renderer" tabindex="-1" target="_blank">
                 <ytl-icon class="icon style-scope ytmusic-menu-navigation-item-renderer">
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;" class="style-scope yt-icon">
                         <g class="style-scope yt-icon">
@@ -93,6 +93,33 @@
         });
     }
 
+    function formatUrl(url) {
+        let baseUrl = "https://www.youtube.com/";
+    
+        if (url.startsWith("watch?playlist=RDAMPL")) {
+            return baseUrl + url.replace("watch?playlist=RDAMPL", "playlist?list=");
+        }
+    
+        if (url.includes("&list=RDAMVM")) {
+            return baseUrl + url.replace(/&list=RDAMVM[^&]+/, "");
+        }
+    
+        return baseUrl + url; // Return unchanged if no modification is needed
+    }
+
+    function getRadioLink(listBox) {
+        const items = listBox.querySelectorAll("ytmusic-menu-navigation-item-renderer");
+
+        for (var item of items) {
+            if (item.querySelector("yt-formatted-string").innerHTML === "Start radio") {
+                const link = item.querySelector("a").getAttribute("href");
+                return formatUrl(link);
+            }
+        }
+
+        return null;
+    }
+
     resolveSelector("ytmusic-menu-popup-renderer > tp-yt-paper-listbox").then((listBox) => {
         
         console.log("Creating List Box Observer!")
@@ -100,9 +127,13 @@
 
             console.log("New Popup!")
 
-            if (!document.querySelector("ytlmusic-menu-navigation-item-renderer")) {
-                console.log("Appending Element")
+            if (!document.querySelector("ytlmusic-menu-navigation-item-renderer") && getRadioLink(listBox)) {
+                // console.log("Appending Element")
+                // BUTTON.appendTo(listBox);
+
+                BUTTON.find("a").attr("href", getRadioLink(listBox));
                 BUTTON.appendTo(listBox);
+
             }
 
             // const nodes = listBox.querySelectorAll("ytmusic-menu-navigation-item-renderer");
