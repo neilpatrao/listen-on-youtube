@@ -66,7 +66,7 @@
                 <ytl-icon class="icon style-scope ytmusic-menu-navigation-item-renderer">
                     <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;" class="style-scope yt-icon">
                         <g class="style-scope yt-icon">
-                            <path d="M10.5,14.41V9.6l4.17,2.4L10.5,14.41z M8.48,8.45L7.77,7.75C6.68,8.83,6,10.34,6,12s0.68,3.17,1.77,4.25l0.71-0.71 C7.57,14.64,7,13.39,7,12S7.57,9.36,8.48,8.45z M16.23,7.75l-0.71,0.71C16.43,9.36,17,10.61,17,12s-0.57,2.64-1.48,3.55l0.71,0.71 C17.32,15.17,18,13.66,18,12S17.32,8.83,16.23,7.75z M5.65,5.63L4.95,4.92C3.13,6.73,2,9.24,2,12s1.13,5.27,2.95,7.08l0.71-0.71 C4.02,16.74,3,14.49,3,12S4.02,7.26,5.65,5.63z M19.05,4.92l-0.71,0.71C19.98,7.26,21,9.51,21,12s-1.02,4.74-2.65,6.37l0.71,0.71 C20.87,17.27,22,14.76,22,12S20.87,6.73,19.05,4.92z" class="style-scope yt-icon"></path>
+                            <path d="M 11.9895 18.9103 c 0 0 6.2653 0 7.8194 -0.4138 c 0.875 -0.2345 1.5331 -0.9103 1.7641 -1.7448 c 0.427 -1.5311 0.427 -4.7517 0.427 -4.7517 c 0 0 0 -3.2 -0.427 -4.7173 c -0.231 -0.8552 -0.8891 -1.5172 -1.7641 -1.7448 c -1.5541 -0.4207 -7.8194 -0.4207 -7.8194 -0.4207 c 0 0 -6.2513 0 -7.7984 0.4207 c -0.861 0.2276 -1.5331 0.8896 -1.7781 1.7448 c -0.413 1.5173 -0.413 4.7173 -0.413 4.7173 c 0 0 0 3.2206 0.413 4.7517 c 0.245 0.8345 0.9171 1.5103 1.7781 1.7448 C 5.7382 18.9103 11.9895 18.9103 11.9895 18.9103 z M 10 9 l 5 3 l -5 3 V 9 z" class="style-scope yt-icon"></path>
                         </g>
                     </svg>
                     <!--css-build:shady--><!--css-build:shady-->
@@ -103,19 +103,6 @@
         }
     
         return baseUrl + url; // Return unchanged if no modification is needed
-    }
-
-    function getRadioLink(listBox) {
-        const items = listBox.querySelectorAll("ytmusic-menu-navigation-item-renderer");
-
-        for (var item of items) {
-            if (item.querySelector("yt-formatted-string").innerHTML === "Start radio") {
-                const link = item.querySelector("a").getAttribute("href");
-                return formatUrl(link);
-            }
-        }
-
-        return null;
     }
 
     function getButton(listBox, buttonName) {
