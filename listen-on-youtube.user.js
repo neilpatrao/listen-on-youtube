@@ -118,13 +118,24 @@
         return null;
     }
 
+    function getButton(listBox, buttonName) {
+        const buttons = listBox.querySelectorAll("ytmusic-menu-navigation-item-renderer");
+
+        return Array.from(buttons).find(button => 
+            button.querySelector("yt-formatted-string")?.innerHTML.trim() === buttonName
+        );
+    }
+
     function addButton(listBox) {
 
-        if (!document.querySelector("ytlmusic-menu-navigation-item-renderer") && getRadioLink(listBox)) {
+        if (!document.querySelector("ytlmusic-menu-navigation-item-renderer") && getButton(listBox, "Start radio")) {
 
-            BUTTON.find("a").attr("href", getRadioLink(listBox));
-            BUTTON.appendTo(listBox);
+            const shareButton = getButton(listBox, "Share");
+            const radioButton = getButton(listBox, "Start radio");
 
+            BUTTON.find("a").attr("href", formatUrl(radioButton.querySelector("a").getAttribute("href")));
+
+            shareButton.before(BUTTON[0])
         }
     }
 
