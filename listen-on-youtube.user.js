@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Listen On YouTube
 // @namespace    http://tampermonkey.net/
-// @version      2025-03-24
+// @version      2025-03-26
 // @description  Adds "Listen on YouTube" button to YouTube Music.
 // @author       Neil Patrao
 // @match        *://music.youtube.com/*
@@ -76,8 +76,6 @@
         </ytlmusic-menu-navigation-item-renderer>
     `);
 
-    const TEST = $(`<div>Hello</div>`)
-
     function resolveSelector(selector, index = 0, root = document) {
         return new Promise(resolve => {
             if (root.querySelectorAll(selector)[index]) {
@@ -120,33 +118,22 @@
         return null;
     }
 
+    function addButton(listBox) {
+
+        if (!document.querySelector("ytlmusic-menu-navigation-item-renderer") && getRadioLink(listBox)) {
+
+            BUTTON.find("a").attr("href", getRadioLink(listBox));
+            BUTTON.appendTo(listBox);
+
+        }
+    }
+
     resolveSelector("ytmusic-menu-popup-renderer > tp-yt-paper-listbox").then((listBox) => {
-        
-        console.log("Creating List Box Observer!")
-        var listBoxObserver = new MutationObserver(mutations => {
 
-            console.log("New Popup!")
-
-            if (!document.querySelector("ytlmusic-menu-navigation-item-renderer") && getRadioLink(listBox)) {
-                // console.log("Appending Element")
-                // BUTTON.appendTo(listBox);
-
-                BUTTON.find("a").attr("href", getRadioLink(listBox));
-                BUTTON.appendTo(listBox);
-
-            }
-
-            // const nodes = listBox.querySelectorAll("ytmusic-menu-navigation-item-renderer");
-
-            // for (var node of nodes) {
-            //     if (node.querySelector("yt-formatted-string").innerHTML === "Start radio") {
-            //         break;
-            //     }
-            // }
-
-        });
-
+        addButton(listBox);
+        var listBoxObserver = new MutationObserver(mutations => {addButton(listBox);});
         listBoxObserver.observe(listBox, {childList: true});
+
     });
 
 })();
